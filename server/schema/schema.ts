@@ -1,9 +1,9 @@
 import { GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql';
 
 const dummyData = [
-  { name: 'Name of the Wind', genre: 'Fantasy', id: 1 },
-  { name: 'The Final Empire', genre: 'Fantasy', id: 2 },
-  { name: 'The Long Earth', genre: 'Sci-Fi', id: 3 },
+  { title: 'Name of the Wind', genre: 'Fantasy', id: '1' },
+  { title: 'The Final Empire', genre: 'Fantasy', id: '2' },
+  { title: 'The Long Earth', genre: 'Sci-Fi', id: '3' },
 ];
 
 const BookType = new GraphQLObjectType({
@@ -31,9 +31,7 @@ const RootQuery = new GraphQLObjectType({
       type: BookType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        console.log(args.id);
         const request = dummyData.find((data) => data.id === args.id);
-        if (!request) throw new Error(`${args.id} returned no data`);
         console.log(request);
         return request;
       },
